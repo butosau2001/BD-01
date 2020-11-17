@@ -1,7 +1,7 @@
 pessoa(nom_pessoa,$seq_pessoa)
 formacao_complementar(carga_horaria,$seq_formacao_comp,dsc_formacao_comp,dat_inicio,dat_fim,#instituicao)
 instituicao($seq_inst,dsc_inst,cod_inst)
-assoc_curso_instituicao($seq_assoc_curso,$#curso,$#instituicao)
+assoc_curso_instituicao($seq_assoc_curso,#curso,#instituicao)
 curso($seq_curso,dsc_curso)
 periodo_sanduiche_formacao_instituicao_pessoa($#formacao,$#instituicao,$#pessoa)
 assoc_titulacao_conceito(conceito,$seq_assoc_titulacao,#tipo,#assoc_curso_instituicao)
