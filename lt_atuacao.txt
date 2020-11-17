@@ -12,18 +12,18 @@ instituicao($seq_inst,dsc_ins,cod_inst)
 curriculo($id_lattes,id_orcid,txt_autor,num_telefone,link_homepage)
 
 pesquisa(dat_fim,dat_inicio,dsc_local,$seq_atividade_pesquisa,#seq_inst,#id_lattes)
-assoc_pesquisa_linha_pesquisa($#seq_atividade_pesquisa, $#seq_linha_pesquisa)
 linha_pesquisa($seq_linha_pesquisa,dsc_linha_pesquisa)
+assoc_pesquisa_linha_pesquisa($#seq_atividade_pesquisa, $#seq_linha_pesquisa)
 
 ensino(dat_fim,dat_inicio,$seq_atividade_ensino,#seq_inst,#id_lattes,#seq_nivel_ensino,#seq_curso)
-assoc_disciplina_ensino($#seq_atividade_ensino, $#seq_disciplina)
 disciplina($seq_disciplina, dsc_disciplina, cod_disciplina)
 nivel_ensino($seq_nivel, dsc_nivel)
 curso($seq_curso,dsc_curso)
+assoc_disciplina_ensino($#seq_atividade_ensino, $#seq_disciplina)
 
 administracao(dat_fim,dat_inicio,dsc_setor,dsc_local,$seq_atividade_administracao,#seq_inst,#id_lattes)
-assoc_cargo_administracao($#seq_atividade_administracao, $#seq_cargo)
 cargo($seq_cargo,dsc_cargo)
+assoc_cargo_administracao($#seq_atividade_administracao, $#seq_cargo)
 
 servico_tecnico(dat_fim,dat_inicio,dsc_local,flg_empresa_privada,$seq_atividade_servico,#seq_inst,#id_lattes,#seq_servico)
 servico($seq_servico,dsc_servico)
