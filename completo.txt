@@ -1,64 +1,87 @@
 $=PK
 #=FK
 ========================
-vinculo_instituicional($seq_vinculo,dsc_vinculo,num_carga_horaria,dat_inicio,dat_fim,outras_informacoes,#instituicao,#curriculo,#enquadramento,#regime)
-instituicao($seq_inst,dsc_ins,cod_inst)
-atividade(dat_fim,dat_inicio,$seq_atividade,#instituicao,#curriculo)
-curriculo(txt_autor,link_homepage,$id_lattes,id_orcid,num_telefone)
-administracao(dsc_setor,dsc_local,$#atividade)
-pesquisa(dsc_local,$#atividade)
-enquadramento($seq_enquad,dsc_enquad)
-regime($seq_regime,dsc_regime)
-linha_pesquisa($seq_linha_pesquisa,dsc_linha_pesquisa)
-linha_pesquisa_e_pesquisa($#pesquisa,$#linha_pesquisa)
-ensino($#atividade,#nivel_ensino,#curso)
-nivel_ensino(dsc_nivel,$seq_nivel)
-disciplina_ministrada($#ensino,$#disciplina)
-disciplina(dsc_disciplina,$seq_disciplina,cod_disciplina)
-curso($seq_curso,dsc_curso)
-cargo(dsc_cargo,$seq_cargo)
-cargo_funcao($#administracao,$#cargo)
-=
-tipo_logradouto($seq_tipo_logradouro,dsc_tipo_logradouro)
-logradouro(dsc_logradouro, cep, $seq_logradouro,#bairro,#tipo_logradouro)
-bairro($seq_bairro,dsc_bairro,#cidade)
-cidade($seq_cidade,dsc_cidade,#estado)
-estado($seq_estado,dsc_estado,#pais)
-pais($seq_pais,dsc_pais)
-instituicao($seq_inst,dsc_inst,cod_inst,#logradouro)
-departamento(dsc_departamento,cod_departamento,$seq_departamento,#instituicao)
-curriculo(txt_autor,link_homepage,$id_lattes,id_orcid,num_telefone,#departamento)
-=
+curriculo($id_lattes,id_orcid,txt_autor,num_telefone,link_homepage)
 pessoa(nom_pessoa,$seq_pessoa)
-formacao_complementar(carga_horaria,$seq_formacao_comp,dsc_formacao_comp,dat_inicio,dat_fim,#instituicao)
-instituicao($seq_inst,dsc_inst,cod_inst)
-assoc_curso_instituicao($seq_assoc_curso,#curso,#instituicao)
+
+evento(dsc_evento,$seq_evento,dat_evento)
+
+instituicao($seq_inst,dsc_ins,cod_inst)
 curso($seq_curso,dsc_curso)
-periodo_sanduiche_formacao_instituicao_pessoa($#formacao,$#instituicao,$#pessoa)
-assoc_titulacao_conceito(conceito,$seq_assoc_titulacao,#tipo,#assoc_curso_instituicao)
-tipo($seq_tipo,dsc_tipo)
+=
+vinculo_instituicional($seq_vinculo,dsc_vinculo,num_carga_horaria,dat_inicio,dat_fim,outras_informacoes,#seq_inst,#id_lattes)
+
+regime($seq_regime,dsc_regime)
+assoc_regime_vinculo($#seq_vinculo,#seq_regime)
+
+enquadramento($seq_enquadramento,dsc_enquadramento)
+assoc_enquadramento_vinculo($#seq_vinculo,#seq_enquadramento)
+
+pesquisa(dat_fim,dat_inicio,dsc_local,$seq_atividade_pesquisa,#seq_inst,#id_lattes)
+linha_pesquisa($seq_linha_pesquisa,dsc_linha_pesquisa)
+assoc_pesquisa_linha_pesquisa($#seq_atividade_pesquisa, $#seq_linha_pesquisa)
+
+ensino(dat_fim,dat_inicio,$seq_atividade_ensino,#seq_inst,#id_lattes,#seq_nivel_ensino,#seq_curso)
+disciplina($seq_disciplina, dsc_disciplina, cod_disciplina)
+nivel_ensino($seq_nivel, dsc_nivel)
+assoc_disciplina_ensino($#seq_atividade_ensino, $#seq_disciplina)
+
+administracao(dat_fim,dat_inicio,dsc_setor,dsc_local,$seq_atividade_administracao,#seq_inst,#id_lattes)
+cargo($seq_cargo,dsc_cargo)
+assoc_cargo_administracao($#seq_atividade_administracao, $#seq_cargo)
+
+servico_tecnico(dat_fim,dat_inicio,dsc_local,flg_empresa_privada,$seq_atividade_servico,#seq_inst,#id_lattes,#seq_servico)
+servico($seq_servico,dsc_servico)
+=
+logradouro(dsc_logradouro, cep, $seq_logradouro,#seq_bairro,#seq_tipo_logradouro)
+tipo_logradouro($seq_tipo_logradouro,dsc_tipo_logradouro)
+bairro($seq_bairro,dsc_bairro,#seq_cidade)
+cidade($seq_cidade,dsc_cidade,#seq_estado)
+estado($seq_estado,dsc_estado,#seq_pais)
+pais($seq_pais,dsc_pais)
+departamento(dsc_departamento,cod_departamento,$seq_departamento,#seq_instituicao)
+=
+formacao_complementar(carga_horaria,$seq_formacao_comp,dsc_formacao_comp,dat_inicio,dat_fim,#seq_inst)
 formacao($seq_formacao,dsc_formacao,dat_inicio,dat_fim,#assoc_titulacao_conceito,#pessoa,#programa_pesquisa)
+
+tipo($seq_tipo,dsc_tipo)
+
+assoc_curso_instituicao($seq_assoc_curso,$#seq_curso,$#seq_inst)
+assoc_periodo_sanduiche($#seq_formacao,$#seq_inst,$#seq_pessoa)
+assoc_titulacao_conceito(conceito,$seq_assoc_titulacao,$#seq_tipo,$#seq_assoc_curso_instituicao)
+
 programa_pesquisa($seq_pesquisa,dsc_programa)
-tipo_area(dsc_tipo_area,$seq_tipo_area)
-area_formacao(#tipo_area,#formacao)
-area(#$tipo_area,#grande_area)
-grande_area($#tipo_area)
-especialidade($#tipo_area,#subarea)
-subarea(#$tipo_area,#area)
-palavras_chave(#palavra_chave,#formacao)
+assoc_programa_pesquisa_formacao($#seq_programa, $#seq_formacao)
+
+especialidade($seq_especialidade,dsc_especialidade,#seq_subarea)
+subarea($seq_subarea,dsc_subarea,#seq_area)
+area($seq_area,dsc_area,#seq_grande_area)
+grande_area($seq_grande_area, dsc_grande_area)
+
+assoc_especialidade_formacao($#seq_especialidade,$#seq_formacao)
+assoc_subarea_formacao($#seq_subarea,$#seq_formacao)
+assoc_area_formacao($#seq_area,$#seq_formacao)
+assoc_grande_area_formacao($#seq_grande_area,$#seq_formacao)
+
 palavra_chave($seq_palavra,dsc_palavra)
-formacao_curriculo(#curriculo,#formacao)
-curriculo(txt_autor,link_homepage,$id_lattes,id_orcid,num_telefone,#pessoa)
+assoc_palavra_chave_formacao($#palavra_chave,$#formacao)
+
+assoc_formacao_curriculo($#curriculo,$#formacao)
 =
 bolsaNP(vlr_bolsa,dsc_bolsa,$seq_bolsa)
+assoc_bolsa_curriculo($#id_lattes, $#seq_bolsa)
+
 premio($seq_premio,dsc_premio,ano_premio)
-curriculo_premio(#premio,#curriculo)
-curriculo(num_telefone,link_homepage,$id_lattes,txt_autor,id_orcid,#bolsaNP,#pessoa)
-pessoa(nom_pessoa,$seq_pessoa)
-nome_em_citacoes(dsc_citacao,$seq_citacao,#pessoa)
-organiza(#pessoa,#evento)
-evento(dsc_evento,$seq_evento,dat_evento)
-participa(#evento,#pessoa)
+assoc_premio_curriculo($#seq_premio,$#id_lattes)
+
+nome_em_citacoes(dsc_citacao,$seq_citacao,$#seq_pessoa)
+
+assoc_organizacao_evento($#seq_pessoa,$#seq_evento)
+assoc_participacao_evento($#seq_evento,$#seq_pessoa)
+
 idioma(dsc_idioma,$seq_idioma)
-nivel_idioma($seq_assoc_idioma_nivel,#nivel_fala,#nivel_ler,#nivel_compreende,#curriculo,#idioma)
-nivel($seq_nivel,#dsc_nivel)
+nivel($seq_nivel, dsc_nivel)
+assoc_idioma_curriculo($seq_assoc_idioma_nivel,$#id_lattes,$#seq_idioma)
+assoc_fala_idioma_nivel($#seq_assoc_idioma_nivel, #seq_nivel)
+assoc_leitura_idioma_nivel($#seq_assoc_idioma_nivel, #seq_nivel)
+assoc_compreensao_idioma_nivel($#seq_assoc_idioma_nivel, #seq_nivel)
