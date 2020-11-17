@@ -1,0 +1,30 @@
+$=PK
+#=FK
+vinculo_instituicional($seq_vinculo,dsc_vinculo,num_carga_horaria,dat_inicio,dat_fim,outras_informacoes,#seq_inst,#id_lattes)
+
+regime($seq_regime,dsc_regime)
+assoc_regime_vinculo($#seq_vinculo,#seq_regime)
+
+enquadramento($seq_enquadramento,dsc_enquadramento)
+assoc_enquadramento_vinculo($#seq_vinculo,#seq_enquadramento)
+
+instituicao($seq_inst,dsc_ins,cod_inst)
+curriculo($id_lattes,id_orcid,txt_autor,num_telefone,link_homepage)
+
+pesquisa(dat_fim,dat_inicio,dsc_local,$seq_atividade_pesquisa,#seq_inst,#id_lattes)
+assoc_pesquisa_linha_pesquisa($#seq_atividade_pesquisa, $#seq_linha_pesquisa)
+linha_pesquisa($seq_linha_pesquisa,dsc_linha_pesquisa)
+
+ensino(dat_fim,dat_inicio,$seq_atividade_ensino,#seq_inst,#id_lattes,#seq_nivel_ensino,#seq_curso)
+assoc_disciplina_ensino($#seq_atividade_ensino, $#seq_disciplina)
+disciplina($seq_disciplina, dsc_disciplina, cod_disciplina)
+nivel_ensino($seq_nivel, dsc_nivel)
+curso($seq_curso,dsc_curso)
+
+administracao(dat_fim,dat_inicio,dsc_setor,dsc_local,$seq_atividade_administracao,#seq_inst,#id_lattes)
+assoc_cargo_administracao($#seq_atividade_administracao, $#seq_cargo)
+cargo($seq_cargo,dsc_cargo)
+
+servico_tecnico(dat_fim,dat_inicio,dsc_local,flg_empresa_privada,$seq_atividade_servico,#seq_inst,#id_lattes,#seq_servico)
+servico($seq_servico,dsc_servico)
+
