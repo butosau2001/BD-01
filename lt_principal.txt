@@ -1,3 +1,5 @@
+$=PK
+#=FK
 bolsaNP(vlr_bolsa,dsc_bolsa,$seq_bolsa)
 assoc_bolsa_curriculo($#id_lattes, $#seq_bolsa)
 

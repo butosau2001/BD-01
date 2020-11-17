@@ -1,3 +1,5 @@
+$=PK
+#=FK
 pessoa(nom_pessoa,$seq_pessoa)
 
 formacao_complementar(carga_horaria,$seq_formacao_comp,dsc_formacao_comp,dat_inicio,dat_fim,#seq_inst)
@@ -23,6 +25,6 @@ assoc_area_formacao($#seq_area,$#seq_formacao)
 assoc_grande_area_formacao($#seq_grande_area,$#seq_formacao)
 
 palavra_chave($seq_palavra,dsc_palavra)
-assoc_palavra_chave_formacao($#palavra_chave,$#formacao)
+assoc_palavra_chave_formacao($#seq_palavra_chave,$#seq_formacao)
 
-assoc_formacao_curriculo($#curriculo,$#formacao)
+assoc_formacao_curriculo($#seq_curriculo,$#seq_formacao)

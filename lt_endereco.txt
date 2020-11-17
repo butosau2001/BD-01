@@ -1,3 +1,5 @@
+$=PK
+#=FK
 logradouro(dsc_logradouro, cep, $seq_logradouro,#seq_bairro,#seq_tipo_logradouro)
 tipo_logradouro($seq_tipo_logradouro,dsc_tipo_logradouro)
 bairro($seq_bairro,dsc_bairro,#seq_cidade)

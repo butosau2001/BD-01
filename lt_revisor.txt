@@ -1,9 +1,10 @@
-curriculo(num_telefone,$id_lattes,link_homepage,txt_autor,id_orcid)
-revisor(dat_inicio,$seq_revisao,dat_fim)
-curriculo_revisor(#revisor,#curriculo)
-
-revisor_periodico($#revisor,#periodico)
-revisor_projeto_de_fomento($#revisor,#agencia_de_fomento)
-
+$=PK
+#=FK
 agencia_de_fomento($seq_agencia,dsc_agencia)
 periodico($seq_periodico,dsc_periodico)
+
+revisor_periodico($seq_revisor_periodico,dat_inicio,dat_fim,#seq_periodico)
+revisor_projeto_de_fomento($seq_revisor_fomento,dat_inicio,dat_fim,#seq_agencia)
+assoc_curriculo_revisor_periodico($#seq_revisor_periodico,$#id_lattes)
+assoc_curriculo_revisor_fomento($#seq_revisor_fomento,$#id_lattes)
+

@@ -1,0 +1,16 @@
+$=PK
+#=FK
+tipo_banca($seq_tipo_banca, dsc_tipo_banca)
+tipo_trabalho($seq_tipo_trabalho,dsc_tipo_trabalho)
+
+banca_trabalho($seq_banca_trabalho,dat_inicio,dat_banca,#seq_tipo_banca,#(seq_pessoa)seq_dono_banca,#(seq_pessoa)seq_orientador,#seq_tipo_trabalho,#seq_situacao,#seq_assoc_titulacao)
+banca_julgadora($seq_banca_julgadora,dat_banca,dsc_banca_julgadora,#seq_tipo_banca,#seq_inst)
+
+assoc_participante_banca_trabalho($#seq_pessoa,$#seq_banca_trabalho)
+assoc_participante_banca_julgadora($#seq_pessoa,$#seq_banca_julgadora)
+
+assoc_autor_trabalho($#seq_banca_trabalho,$#(seq_pessoa)seq_autor)
+assoc_coorientador_trabalho($#seq_banca_trabalho,$#(seq_pessoa)seq_coorientador)
+
+
+
