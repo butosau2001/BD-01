@@ -1,5 +1,6 @@
 $=PK
 #=FK
+tipo_projeto($seq_tipo_projeto,dsc_tipo_projeto)
 projeto($seq_projeto,dat_inicio,dat_fim,dsc_projeto,num_envolvidos_grad,num_envolvidos_mest,num_envolvidos_dout,flg_inovacao,nom_titulo,num_orientacoes,num_producoes,#seq_tipo_projeto,#seq_situacao)
 
 situacao($seq_situacao,dsc_situacao)
@@ -8,7 +9,10 @@ assoc_pessoa_papel_projeto($#seq_papel,$#seq_projeto,$#seq_pessoa)
 
 tipo_financiamento($seq_tipo_fin,dsc_tipo_fin)
 
-assoc_financiamento($#seq_assoc_financiamento,$#seq_inst,$#seq_tipo_fin,$#seq_projeto)
+assoc_financiamento($seq_assoc_financiamento,$#seq_inst,$#seq_tipo_fin,$#seq_projeto)
+
+edital($seq_edital,dsc_edital)
+moeda($seq_moeda,cod_moeda)
+
 assoc_financiamento_edital($#seq_assoc_financiamento,$#seq_edital,processo)
 assoc_financiamento_moeda($#seq_assoc_financiamento,$#seq_moeda,valor)
-assoc(#moeda,valor,#edital,processo)

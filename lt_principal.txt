@@ -10,7 +10,7 @@ nome_em_citacoes(dsc_citacao,$seq_citacao,$#seq_pessoa)
 
 evento(dsc_evento,$seq_evento,dat_evento)
 assoc_organizacao_evento($#seq_pessoa,$#seq_evento)
-assoc_participacao_evento($#seq_evento,$#seq_pessoa)
+assoc_participacao_evento($#seq_evento,$#seq_pessoa,titulo_trabalho)
 
 idioma(dsc_idioma,$seq_idioma)
 nivel($seq_nivel, dsc_nivel)
