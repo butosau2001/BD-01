@@ -15,4 +15,4 @@ edital($seq_edital,dsc_edital)
 moeda($seq_moeda,cod_moeda)
 
 assoc_financiamento_edital($#seq_assoc_financiamento,$#seq_edital,processo)
-assoc_financiamento_moeda($#seq_assoc_financiamento,$#seq_moeda,valor)
+assoc_financiamento_moeda($#seq_assoc_financiamento,#seq_moeda,valor)

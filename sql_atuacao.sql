@@ -24,8 +24,8 @@ CREATE TABLE vinculo_instituicional(
   seq_inst integer,
   id_lattes integer,
   PRIMARY KEY (seq_vinculo),
-  FOREIGN KEY (seq_inst) REFERENCES seq_inst (instituicao) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (id_lattes) REFERENCES id_lattes (curriculo) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE regime(
@@ -38,8 +38,8 @@ CREATE TABLE assoc_regime_vinculo(
   seq_vinculo integer,
   seq_regime integer,
   PRIMARY KEY (seq_vinculo),
-  FOREIGN KEY (seq_vinculo) REFERENCES seq_vinculo (vinculo_instituicional) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_regime) REFERENCES seq_regime (regime) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_vinculo) REFERENCES vinculo_instituicional (seq_vinculo) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_regime) REFERENCES regime (seq_regime) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE enquadramento(
@@ -52,8 +52,8 @@ CREATE TABLE assoc_enquadramento_vinculo(
   seq_vinculo integer,
   seq_enquadramento integer,
   PRIMARY KEY (seq_vinculo),
-  FOREIGN KEY (seq_vinculo) REFERENCES seq_vinculo (vinculo_instituicional) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_enquadramento) REFERENCES seq_enquadramento (enquadramento) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_vinculo) REFERENCES vinculo_instituicional (seq_vinculo) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_enquadramento) REFERENCES enquadramento (seq_enquadramento) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE pesquisa(
@@ -64,8 +64,8 @@ CREATE TABLE pesquisa(
   seq_inst integer,
   id_lattes integer,
   PRIMARY KEY (seq_atividade_pesquisa),
-  FOREIGN KEY (seq_inst) REFERENCES seq_inst (instituicao) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (id_lattes) REFERENCES id_lattes (curriculo) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE linha_pesquisa(
@@ -78,8 +78,8 @@ CREATE TABLE assoc_pesquisa_linha_pesquisa(
   seq_atividade_pesquisa integer,
   seq_linha_pesquisa integer,
   PRIMARY KEY (seq_atividade_pesquisa,seq_linha_pesquisa),
-  FOREIGN KEY (seq_atividade_pesquisa) REFERENCES seq_atividade_pesquisa (pesquisa) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_linha_pesquisa) REFERENCES seq_linha_pesquisa (linha_pesquisa) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_atividade_pesquisa) REFERENCES pesquisa (seq_atividade_pesquisa) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_linha_pesquisa) REFERENCES linha_pesquisa (seq_linha_pesquisa) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE curso(
@@ -103,10 +103,10 @@ CREATE TABLE ensino(
   seq_nivel_ensino integer,
   seq_curso integer,  
   PRIMARY KEY (seq_atividade_ensino),
-  FOREIGN KEY (seq_inst) REFERENCES seq_inst (instituicao) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (id_lattes) REFERENCES id_lattes (curriculo) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_nivel_ensino) REFERENCES seq_nivel_ensino (nivel_ensino) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_curso) REFERENCES seq_curso (curso) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_nivel_ensino) REFERENCES nivel_ensino (seq_nivel_ensino) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_curso) REFERENCES curso (seq_curso) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE disciplina(
@@ -120,8 +120,8 @@ CREATE TABLE assoc_disciplina_ensino(
   seq_atividade_ensino integer,
   seq_disciplina integer,
   PRIMARY KEY (seq_atividade_ensino,seq_disciplina),
-  FOREIGN KEY (seq_atividade_ensino) REFERENCES seq_atividade_ensino (ensino) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_disciplina) REFERENCES seq_disciplina (disciplina) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_atividade_ensino) REFERENCES ensino (seq_atividade_ensino) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_disciplina) REFERENCES disciplina (seq_disciplina) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 
@@ -134,8 +134,8 @@ CREATE TABLE administracao(
   seq_inst integer,
   id_lattes integer,  
   PRIMARY KEY (seq_atividade_administracao),
-  FOREIGN KEY (seq_inst) REFERENCES seq_inst (instituicao) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (id_lattes) REFERENCES id_lattes (curriculo) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE cargo(
@@ -148,8 +148,8 @@ CREATE TABLE assoc_cargo_administracao(
   seq_atividade_administracao integer,
   seq_cargo integer,
   PRIMARY KEY (seq_atividade_administracao,seq_cargo),
-  FOREIGN KEY (seq_atividade_administracao) REFERENCES seq_atividade_administracao (administracao) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_cargo) REFERENCES seq_cargo (cargo) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_atividade_administracao) REFERENCES administracao (seq_atividade_administracao) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_cargo) REFERENCES cargo (seq_cargo) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
 
 CREATE TABLE servico(
@@ -168,7 +168,7 @@ CREATE TABLE servico_tecnico(
   id_lattes integer,
   seq_servico integer,  
   PRIMARY KEY (seq_atividade_servico),
-  FOREIGN KEY (seq_inst) REFERENCES seq_inst (instituicao) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (id_lattes) REFERENCES id_lattes (curriculo) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_servico) REFERENCES seq_servico (servico) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_servico) REFERENCES servico (seq_servico) ON UPDATE RESTRICT ON DELETE RESTRICT
   );
