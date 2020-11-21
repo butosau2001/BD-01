@@ -63,7 +63,10 @@ CREATE TABLE producao_bibliografica (
   num_edicao integer,
   seq_subtipo_prod integer,
   PRIMARY KEY (seq_producao_bibliografica),
-  FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_volume > 0,
+  CHECK pg_inicial <= pg_final,
+  CHECK num_edicao > 0
 );
 
 CREATE TABLE assoc_producao_bibliografica_autor (
@@ -111,7 +114,10 @@ CREATE TABLE resumo(
   seq_anais integer,
   PRIMARY KEY (seq_resumo),
   FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_anais) REFERENCES anais_congresso (seq_anais) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_anais) REFERENCES anais_congresso (seq_anais) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_volume > 0,
+  CHECK pg_inicial <= pg_final,
+  CHECK num_edicao > 0
 );
 
 CREATE TABLE assoc_resumo_autor (
@@ -151,7 +157,10 @@ CREATE TABLE trabalho_completo (
   seq_anais integer,
   PRIMARY KEY (seq_trabalho_completo),
   FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (seq_anais) REFERENCES anais_congresso (seq_anais) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_anais) REFERENCES anais_congresso (seq_anais) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_volume > 0,
+  CHECK pg_inicial <= pg_final,
+  CHECK num_edicao > 0
 );
 
 CREATE TABLE assoc_trabalho_completo_autor (
@@ -188,7 +197,10 @@ CREATE TABLE livro (
   num_edicao integer,
   seq_subtipo_prod integer,
   PRIMARY KEY (seq_livro),
-  FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT
+  FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_volume > 0,
+  CHECK pg_inicial <= pg_final,
+  CHECK num_edicao > 0
 );
 
 CREATE TABLE assoc_livro_autor (
@@ -228,6 +240,9 @@ CREATE TABLE capitulo (
   PRIMARY KEY (seq_capitulo),
   FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_livro) REFERENCES livro (seq_livro) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_volume > 0,
+  CHECK pg_inicial <= pg_final,
+  CHECK num_edicao > 0
 );
 
 CREATE TABLE assoc_capitulo_autor (
@@ -273,6 +288,9 @@ CREATE TABLE publi_revista (
   PRIMARY KEY (seq_publi_revista),
   FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_revista) REFERENCES revista (seq_revista) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_volume > 0,
+  CHECK pg_inicial <= pg_final,
+  CHECK num_edicao > 0
 );
 
 CREATE TABLE assoc_publi_revista_autor (
@@ -318,6 +336,18 @@ CREATE TABLE publi_periodico (
   PRIMARY KEY (seq_publi_periodico),
   FOREIGN KEY (seq_subtipo_prod) REFERENCES subtipo_producao (seq_subtipo_prod) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_periodico) REFERENCES periodico (seq_periodico) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_volume > 0,
+  CHECK pg_inicial <= pg_final,
+  CHECK num_edicao > 0
+);
+
+CREATE TABLE assoc_publi_periodico_indice_citacoes (
+  seq_periodico integer,
+  seq_publi_periodico integer,
+  num_citacoes integer,
+  PRIMARY KEY (seq_periodico, seq_publi_periodico),
+  FOREIGN KEY (seq_periodico) REFERENCES periodico (seq_periodico) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (seq_publi_periodico) REFERENCES publi_periodico (seq_publi_periodico) ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
 CREATE TABLE assoc_publi_periodico_autor (

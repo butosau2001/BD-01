@@ -1,18 +1,18 @@
 CREATE TABLE curriculo(
   id_lattes serial,
   id_orcid integer,
-  txt_autor varchar(50),
-  num_telefone integer,
+  txt_autor varchar(500),
+  num_telefone varchar(20),
   link_homepage varchar(50),
   PRIMARY KEY (id_lattes)
-  );
+);
 
 CREATE TABLE instituicao(
   seq_inst serial,
   dsc_ins varchar(50),
   cod_inst integer,
   PRIMARY KEY (seq_inst)
-  );
+);
 
 CREATE TABLE vinculo_instituicional(
   seq_vinculo serial,
@@ -22,17 +22,18 @@ CREATE TABLE vinculo_instituicional(
   dat_fim date,
   outras_informacoes varchar(50),
   seq_inst integer,
-  id_lattes integer,
+  id_lattes biginteger,
   PRIMARY KEY (seq_vinculo),
   FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CHECK num_carga_horaria >= 0
+);
 
 CREATE TABLE regime(
   seq_regime serial,
   dsc_regime varchar(50),
   PRIMARY KEY (seq_regime)
-  );
+);
 
 CREATE TABLE assoc_regime_vinculo(
   seq_vinculo integer,
@@ -40,13 +41,13 @@ CREATE TABLE assoc_regime_vinculo(
   PRIMARY KEY (seq_vinculo),
   FOREIGN KEY (seq_vinculo) REFERENCES vinculo_instituicional (seq_vinculo) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_regime) REFERENCES regime (seq_regime) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+);
 
 CREATE TABLE enquadramento(
   seq_enquadramento serial,
   dsc_enquadramento varchar(50),
   PRIMARY KEY (seq_enquadramento),
-  );
+);
 
 CREATE TABLE assoc_enquadramento_vinculo(
   seq_vinculo integer,
@@ -54,7 +55,7 @@ CREATE TABLE assoc_enquadramento_vinculo(
   PRIMARY KEY (seq_vinculo),
   FOREIGN KEY (seq_vinculo) REFERENCES vinculo_instituicional (seq_vinculo) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_enquadramento) REFERENCES enquadramento (seq_enquadramento) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+);
 
 CREATE TABLE pesquisa(
   dat_fim date,
@@ -62,17 +63,17 @@ CREATE TABLE pesquisa(
   dsc_local varchar(50),
   seq_atividade_pesquisa serial,
   seq_inst integer,
-  id_lattes integer,
+  id_lattes biginteger,
   PRIMARY KEY (seq_atividade_pesquisa),
   FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+);
 
 CREATE TABLE linha_pesquisa(
   seq_linha_pesquisa serial,
   dsc_linha_pesquisa varchar(50),
   PRIMARY KEY (seq_linha_pesquisa)
-  );
+);
 
 CREATE TABLE assoc_pesquisa_linha_pesquisa(
   seq_atividade_pesquisa integer,
@@ -80,26 +81,26 @@ CREATE TABLE assoc_pesquisa_linha_pesquisa(
   PRIMARY KEY (seq_atividade_pesquisa,seq_linha_pesquisa),
   FOREIGN KEY (seq_atividade_pesquisa) REFERENCES pesquisa (seq_atividade_pesquisa) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_linha_pesquisa) REFERENCES linha_pesquisa (seq_linha_pesquisa) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+);
 
 CREATE TABLE curso(
   seq_curso serial,
   dsc_curso varchar(50),
   PRIMARY KEY (seq_curso)
-  );
+);
 
 CREATE TABLE nivel_ensino(
   seq_nivel serial,
   dsc_nivel varchar(50),
   PRIMARY KEY (seq_nivel)
-  );
+);
 
 CREATE TABLE ensino(
-  dat_fim date,
-  dat_inicio date,
   seq_atividade_ensino serial,
+  dat_inicio date,
+  dat_fim date,
   seq_inst integer,
-  id_lattes integer,
+  id_lattes biginteger,
   seq_nivel_ensino integer,
   seq_curso integer,  
   PRIMARY KEY (seq_atividade_ensino),
@@ -107,14 +108,14 @@ CREATE TABLE ensino(
   FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_nivel_ensino) REFERENCES nivel_ensino (seq_nivel_ensino) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_curso) REFERENCES curso (seq_curso) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+);
 
 CREATE TABLE disciplina(
   seq_disciplina serial,
   dsc_disciplina varchar(50),
   cod_disciplina integer,
   PRIMARY KEY (seq_disciplina)
-  );
+);
 
 CREATE TABLE assoc_disciplina_ensino(
   seq_atividade_ensino integer,
@@ -122,27 +123,27 @@ CREATE TABLE assoc_disciplina_ensino(
   PRIMARY KEY (seq_atividade_ensino,seq_disciplina),
   FOREIGN KEY (seq_atividade_ensino) REFERENCES ensino (seq_atividade_ensino) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_disciplina) REFERENCES disciplina (seq_disciplina) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+);
 
 
 CREATE TABLE administracao(
-  dat_fim date,
+  seq_atividade_administracao serial,
   dat_inicio date,
+  dat_fim date,
   dsc_setor varchar(50),
   dsc_local varchar(50),
-  seq_atividade_administracao serial,
   seq_inst integer,
-  id_lattes integer,  
+  id_lattes biginteger,  
   PRIMARY KEY (seq_atividade_administracao),
   FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
-  );
+);
 
 CREATE TABLE cargo(
   seq_cargo serial,
   dsc_cargo varchar(50),
   PRIMARY KEY (seq_cargo)
-  );
+);
 
 CREATE TABLE assoc_cargo_administracao(
   seq_atividade_administracao integer,
@@ -165,7 +166,7 @@ CREATE TABLE servico_tecnico(
   flg_empresa_privada boolean,
   seq_atividade_servico serial,
   seq_inst integer,
-  id_lattes integer,
+  id_lattes biginteger,
   seq_servico integer,  
   PRIMARY KEY (seq_atividade_servico),
   FOREIGN KEY (seq_inst) REFERENCES instituicao (seq_inst) ON UPDATE RESTRICT ON DELETE RESTRICT,

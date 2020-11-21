@@ -30,7 +30,7 @@ CREATE TABLE revisor_projeto_de_fomento (
 
 CREATE TABLE assoc_curriculo_revisor_periodico (
   seq_revisor_periodico integer,
-  id_lattes integer,
+  id_lattes biginteger,
   PRIMARY KEY (seq_revisor_periodico, id_lattes),
   FOREIGN KEY (seq_revisor_periodico) REFERENCES revisor_periodico (seq_revisor_periodico) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -38,7 +38,7 @@ CREATE TABLE assoc_curriculo_revisor_periodico (
 
 CREATE TABLE assoc_curriculo_revisor_fomento (
   seq_revisor_fomento integer,
-  id_lattes integer,
+  id_lattes biginteger,
   PRIMARY KEY (seq_revisor_fomento, id_lattes),
   FOREIGN KEY (seq_revisor_fomento) REFERENCES revisor_projeto_de_fomento (seq_revisor_fomento) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes) ON UPDATE RESTRICT ON DELETE RESTRICT
