@@ -27,4 +27,4 @@ assoc_grande_area_formacao($#seq_grande_area,$#seq_formacao)
 palavra_chave($seq_palavra,dsc_palavra)
 assoc_palavra_chave_formacao($#seq_palavra_chave,$#seq_formacao)
 
-assoc_formacao_curriculo($#seq_curriculo,$#seq_formacao)
+assoc_formacao_curriculo($#id_lattes,$#seq_formacao)
