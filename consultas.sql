@@ -26,15 +26,15 @@ group by I.dsc_indice
 -- π dsc_indice, SUM(citacoes) (R)
 
 
-selecionar a descricao de todos os departamentos e mostrar a descricao das instituicoes desses departamentos
-- essa consulta serve para saber o nome dos departamentos e em quais instituições eles estão
+--selecionar a descricao de todos os departamentos e mostrar a descricao das instituicoes desses departamentos
+-- essa consulta serve para saber o nome dos departamentos e em quais instituições eles estão
 
 select dep.dsc_departamento, inst.dsc_inst from instituicao inst, departamento dep where dep.seq_inst = inst.seq_inst
-π dep.dsc_departamento, dsc_inst (departamento ⋈ instituicao)
+--π dep.dsc_departamento, dsc_inst (departamento ⋈ instituicao)
 
-selecionar o número de formações com grande área em Ciências Exatas e da Terra.
-- essa consulta serve para saber a quantidade de formações na área de Ciências Exatas e da Terra.
+--selecionar o número de formações com grande área em Ciências Exatas e da Terra.
+-- essa consulta serve para saber a quantidade de formações na área de Ciências Exatas e da Terra.
 
 SELECT count(fo.seq_formacao) FROM formacao fo, assoc_grande_area_formacao agaf , grande_area  ga WHERE fo.seq_formacao=agaf.seq_formacao AND agaf.seq_grande_area=ga.seq_grande_area and ga.dsc_grande_area LIKE "Ciências Exatas e da Terra"
-R <- σ dsc_grande_area = "Ciências Exatas e da Terra" (grande_area)
-π count(seq_formacao) (R ⋈ assoc_grande_area_formacao ⋈ formacao)
+--R <- σ dsc_grande_area = "Ciências Exatas e da Terra" (grande_area)
+--π count(seq_formacao) (R ⋈ assoc_grande_area_formacao ⋈ formacao)
