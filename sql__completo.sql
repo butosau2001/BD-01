@@ -682,6 +682,7 @@ CREATE TABLE producao (
 CREATE TABLE assoc_producao_autor (
   seq_producao integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_producao, seq_autor),
   FOREIGN KEY (seq_producao) REFERENCES producao (seq_producao) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -722,6 +723,7 @@ CREATE TABLE producao_bibliografica (
 CREATE TABLE assoc_producao_bibliografica_autor (
   seq_producao_bibliografica integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_producao, seq_autor),
   FOREIGN KEY (seq_producao_bibliografica) REFERENCES producao_bibliografica (seq_producao_bibliografica) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -773,6 +775,7 @@ CREATE TABLE resumo(
 CREATE TABLE assoc_resumo_autor (
   seq_resumo integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_resumo, seq_autor),
   FOREIGN KEY (seq_resumo) REFERENCES resumo (seq_resumo) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -816,6 +819,7 @@ CREATE TABLE trabalho_completo (
 CREATE TABLE assoc_trabalho_completo_autor (
   seq_trabalho_completo integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_trabalho_completo, seq_autor),
   FOREIGN KEY (seq_trabalho_completo) REFERENCES trabalho_completo (seq_trabalho_completo) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -856,6 +860,7 @@ CREATE TABLE livro (
 CREATE TABLE assoc_livro_autor (
   seq_livro integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_livro, seq_autor),
   FOREIGN KEY (seq_livro) REFERENCES livro (seq_livro) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -898,6 +903,7 @@ CREATE TABLE capitulo (
 CREATE TABLE assoc_capitulo_autor (
   seq_capitulo integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_capitulo, seq_autor),
   FOREIGN KEY (seq_capitulo) REFERENCES capitulo (seq_capitulo) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -946,6 +952,7 @@ CREATE TABLE publi_revista (
 CREATE TABLE assoc_publi_revista_autor (
   seq_publi_revista integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_publi_revista, seq_autor),
   FOREIGN KEY (seq_publi_revista) REFERENCES publi_revista (seq_publi_revista) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -1003,6 +1010,7 @@ CREATE TABLE assoc_publi_periodico_indice_citacoes (
 CREATE TABLE assoc_publi_periodico_autor (
   seq_publi_periodico integer,
   seq_autor integer,
+  flg_organizador boolean,
   PRIMARY KEY (seq_publi_periodico, seq_autor),
   FOREIGN KEY (seq_publi_periodico) REFERENCES publi_periodico (seq_publi_periodico) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_autor) REFERENCES pessoa (seq_pessoa) ON UPDATE RESTRICT ON DELETE RESTRICT
