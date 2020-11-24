@@ -381,3 +381,17 @@ CREATE TABLE assoc_publi_periodico_categoria (
   FOREIGN KEY (seq_publi_periodico) REFERENCES publi_periodico (seq_publi_periodico) ON UPDATE RESTRICT ON DELETE RESTRICT,
   FOREIGN KEY (seq_categoria_prod) REFERENCES categoria_producao (seq_categoria_prod) ON UPDATE RESTRICT ON DELETE RESTRICT
 );
+
+CREATE TABLE citacoes_gerais (
+  id_lattes biginteger,
+  seq_indice integer,
+  dat_citacoes date,
+  fator_h integer,
+  num_trabalhos integer,
+  num_citacoes integer,
+  PRIMARY KEY (id_lattes, seq_indice),
+  FOREIGN KEY (id_lattes) REFERENCES curriculo (id_lattes),
+  FOREIGN KEY (seq_indice) REFERENCES indice (seq_indice)
+  CHECK num_trabalhos > 0,
+  CHECK num_citacoes > 0
+);

@@ -48,3 +48,5 @@ assoc_publi_periodico_indice_citacoes($#seq_periodico,$#seq_publi_periodicos,num
 assoc_publi_periodico_autor($#seq_publi_periodico,$#(seq_pessoa)seq_autor,flg_organizador)
 assoc_publi_periodico_instituicao($#seq_publi_periodico,#seq_inst)
 assoc_publi_periodico_categoria($#seq_publi_periodico,#seq_categoria_prod)
+
+citacoes_gerais($#id_lattes,$#seq_indice,dat_citacoes,fator_h,num_trabalhos,num_citacoes)
